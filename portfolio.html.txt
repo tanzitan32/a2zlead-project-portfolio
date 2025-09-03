@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Lead Generation & Outreach Tool – Portfolio</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      color: white;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 8px 0;
+      padding: 10px;
+      background: #334155;
+      border-radius: 8px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #6366f1, #0ea5e9);
+      transition: transform 0.2s ease;
+    }
+    .links a:hover {
+      transform: scale(1.05);
+    }
+    .media {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .media iframe, .media img {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AI Lead Generation & Outreach Tool</h1>
+    <p>Smart automation for leads, outreach, and analytics 🚀</p>
+  </header>
+
+  <section>
+    <h2>📌 Project Overview</h2>
+    <p>
+      Built a complete AI-powered SaaS tool that automates lead generation, 
+      personalized email outreach, bulk sending, and real-time analytics tracking. 
+      Delivered as a multi-milestone project for a client’s business domain.
+    </p>
+  </section>
+
+  <section>
+    <h2>✅ Key Features</h2>
+    <ul>
+      <li>AI Lead Generation (zip-code / business search)</li>
+      <li>AI Email Composer (personalized & bulk)</li>
+      <li>Bulk Email Sender + Follow-ups</li>
+      <li>Analytics Dashboard (open/click tracking, CRM integration)</li>
+      <li>Export & CSV support</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🗂 Milestones</h2>
+    <ul>
+      <li><b>Milestone 1:</b> UI + System Setup – <i>Completed</i></li>
+      <li><b>Milestone 2:</b> Lead Generation System – <i>Completed</i></li>
+      <li><b>Milestone 3:</b> AI Email Writer + Outreach – <i>Completed</i></li>
+      <li><b>Milestone 4:</b> Email Sending + Follow-ups – <i>Completed</i></li>
+      <li><b>Milestone 5:</b> Analytics + CRM Integration – <i>Completed</i></li>
+    </ul>
+  </section>
+
+  <section class="links">
+    <h2>🔗 Project Links</h2>
+    <a href="https://a2zlead.com/" target="_blank">Live Tool</a>
+    <a href="https://tinyurl.com/5a5ht47u" target="_blank">Project Files</a>
+  </section>
+
+  <section class="media">
+    <h2>🎥 Demo Video</h2>
+    <!-- Replace with your Loom/YouTube embed link -->
+    <iframe src="https://www.youtube.com/embed/your-video-id" allowfullscreen></iframe>
+
+    <h2>🖼 Screenshots</h2>
+    <!-- Replace with your screenshots -->
+    <img src="screenshot1.png" alt="Dashboard Screenshot">
+    <img src="screenshot2.png" alt="AI Email Composer Screenshot">
+
+    <h2>📋 Notion Checklist Proof</h2>
+    <img src="notion-checklist.png" alt="Project Checklist Proof">
+  </section>
+
+  <footer>
+    © 2025 Trusted Ranking Spot – Portfolio Case Study
+  </footer>
+
+</body>
+</html>
