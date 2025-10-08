@@ -1,459 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>🚀 Full AI • SaaS Developer Flipbook Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 SaaS & Web Development Portfolio</title>
   <style>
-    :root{
-      --bg:#071025;
-      --card:#0f172a;
-      --glass-border: rgba(255,255,255,0.06);
-      --accent1: #7c3aed;
-      --accent2: #06b6d4;
-      --text: #e6eef8;
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
     }
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;padding:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-
-    /* animated gradient wave background */
-    .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-    .gradient-wave{
-      position:absolute;inset:-20%;filter:blur(40px) saturate(120%);opacity:0.95; transform:scale(1.1);
-      background: linear-gradient(120deg, rgba(124,58,237,0.25), rgba(6,182,212,0.25), rgba(59,130,246,0.18));
-      animation: float 12s ease-in-out infinite alternate;
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      color: white;
     }
-    .gradient-wave.wave-2{animation-duration:18s;opacity:0.6;transform:translateY(20%) rotate(10deg) scale(1.2)}
-    .gradient-wave.wave-3{animation-duration:25s;opacity:0.45;transform:translateY(-10%) rotate(-6deg) scale(1.4)}
-    @keyframes float{from{transform:translateY(0) scale(1.05)}to{transform:translateY(-6%) scale(1.15)}}
-    .stars{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:60px 60px;opacity:0.25;mix-blend-mode:screen}
-
-    .wrap{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;height:100vh;padding:28px}
-    .book{
-      width:980px;height:720px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px;box-shadow:0 30px 60px rgba(2,6,23,0.65);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.04);
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
     }
-    .book-header{display:flex;align-items:center;gap:16px;padding:20px 28px;border-bottom:1px solid var(--glass-border);background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00))}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{width:64px;height:64px;border-radius:12px;object-fit:cover}
-    .brand h1{font-size:20px;margin:0;font-weight:700}
-    .brand p{margin:0;font-size:12px;opacity:0.8}
-
-    #flipbook{position:relative;width:100%;height:calc(100% - 84px);background:transparent;padding:18px;box-sizing:border-box}
-
-    .page{width:100%;height:100%;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));border-radius:8px;padding:22px;box-sizing:border-box;overflow:auto}
-    .page h2{margin-top:0;color:var(--accent1)}
-    .page p{color:var(--text);opacity:0.95}
-
-    .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .project-card{background:rgba(255,255,255,0.02);border-radius:10px;padding:14px;border:1px solid var(--glass-border)}
-    .project-card img, .project-card video{width:100%;border-radius:8px;margin-top:8px}
-    .meta{font-size:13px;color:rgba(230,238,248,0.8);margin-top:6px}
-
-    .nav{position:absolute;inset:0;pointer-events:none}
-    .nav .arrow{position:absolute;top:50%;transform:translateY(-50%);pointer-events:auto;width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.018));display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.04);cursor:pointer}
-    .nav .arrow.left{left:12px}
-    .nav .arrow.right{right:12px}
-    .nav .page-indicator{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;background:rgba(0,0,0,0.25);padding:8px 12px;border-radius:999px;pointer-events:auto;font-size:13px}
-
-    .audio-btn{position:absolute;right:20px;top:18px;background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:8px 12px;border-radius:999px;color:white;cursor:pointer;border:none}
-
-    @media (max-width:1100px){.book{width:92%;height:76vh}}
-    @media (max-width:700px){.book{height:auto;padding-bottom:60px}.wrap{padding:12px}.nav .arrow{width:44px;height:44px}}
-
-    .cta{display:inline-block;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;text-decoration:none}
-    .badge{display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:12px}
-
-    /* keep original styles intact for embedded original content */
-    .orig-section { margin-bottom:18px; }
-    .orig-section img{max-width:100%;border-radius:12px;margin:8px 0}
-    .orig-embed { width:100%;border-radius:12px;margin-top:8px }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 8px 0;
+      padding: 10px;
+      background: #334155;
+      border-radius: 8px;
+    }
+    .project {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #334155;
+      border-radius: 12px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #6366f1, #0ea5e9);
+      transition: transform 0.2s ease;
+    }
+    .links a:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    .testimonial img, .project img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 10px 0;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Animated background -->
-  <div class="bg-wrap" aria-hidden="true">
-    <div class="gradient-wave" style="width:140%;height:120%;left:-20%;top:-10%;"></div>
-    <div class="gradient-wave wave-2" style="width:120%;height:110%;left:-10%;top:20%;"></div>
-    <div class="gradient-wave wave-3" style="width:110%;height:100%;right:-10%;top:-5%;"></div>
-    <div class="stars"></div>
+<header>
+  <!-- 🔗 Add your profile/logo image here -->
+  <img src="https://cdn.kwork.com/files/avatar/large_r/49/13682589-8.jpg" alt="" style="width:100px; border-radius:12px; margin-bottom:15px;">
+  <h1>🚀 SaaS & Web Development Portfolio</h1>
+  <p>Custom SaaS, Apps & Automation Solutions with Modern Tech ⚡</p>
+</header>
+
+<section>
+  <h2>👋 About Me</h2>
+  <p>
+    I’m a passionate developer specialized in building <b>SaaS platforms</b>, <b>custom web apps</b>, and <b>automation tools</b>. 
+    From MVPs to production-ready solutions, I create scalable products with AI integrations, strong backend systems, and user-friendly designs.
+  </p>
+</section>
+
+<section>
+  <h2>💡 Services Offered</h2>
+  <ul>
+    <li>⚙️ SaaS Development (MVP → Full Scale)</li>
+    <li>🌐 Web Development (Dashboards, Custom Tools)</li>
+    <li>📱 App Development (Cross-platform & Automation)</li>
+    <li>🤖 AI Integrations (ChatGPT, APIs, Bots)</li>
+    <li>☁️ Cloud Deployment (VPS, Vercel, AWS)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>📂 Featured Projects</h2>
+
+  <div class="project">
+    <h3>🤖 Telegram Bot Creator SaaS (2025)</h3>
+    <p>Allows users to create and clone custom Telegram bots with full category/city controls, separate databases, and mass messaging. Includes integrated payment system and unlimited cloning options.</p>
+    <p><b>Tech:</b> Node.js, Python, Telegram API</p>
+    <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-home.png" alt="">
+    <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-bots.png" alt="">
+    <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-products.png" alt="">
+    <section class="media">
+  <h2>🎥 Project Demo Video</h2>
+  <video controls autoplay muted loop style="width:100%; border-radius:12px;">
+    <source src="https://ik.imagekit.io/euhds2mtf/video_2025-10-08_17-56-55.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</section>
+<section class="media">
+  <h2>🎥 Project Demo Video</h2>
+  <video controls autoplay muted loop style="width:100%; border-radius:12px;">
+    <source src="https://ik.imagekit.io/euhds2mtf/telegram%20bot%20showcase.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</section>
+
   </div>
 
-  <div class="wrap">
-    <div class="book" role="application" aria-label="Portfolio flipbook">
-      <div class="book-header">
-        <div class="brand">
-          <img src="https://cdn.kwork.com/files/avatar/large_r/49/13682589-8.jpg" alt="profile">
-          <div>
-            <h1>Tanveer Hassan • SaaS & AI Developer</h1>
-            <p>Building scalable SaaS, automation & AI tools ⚡</p>
-          </div>
-        </div>
-        <button id="audioToggle" class="audio-btn">🔊 Music</button>
-      </div>
+  <div class="project">
+    <h3>📰 AI PBN Poster SaaS</h3>
+    <p>Automation platform for posting content across private blog networks (PBNs) with scheduling, account management, and smart AI-generated content options.</p>
+    <p><b>Tech:</b> Python, Puppeteer, APIs</p>
+    <img src="https://ik.imagekit.io/euhds2mtf/PBN-Poster-Pro-Professional-PBN-Management-10-06-2025_03_24_PM.png" alt="">
+    <img src="https://ik.imagekit.io/euhds2mtf/pbn%20poster%201.png" alt="">
+    <img src="https://ik.imagekit.io/euhds2mtf/Admin-Dashboard-PBN-Poster-Pro.png" alt="">
+    <img src="https://ik.imagekit.io/euhds2mtf/Pricing-Plans-PBN-Poster-Pro.png" alt="">
+  </div>
 
-      <div id="flipbook">
-        <!-- ========== PAGE 1 (Cover / Intro) ========== -->
-        <div class="page">
-          <h2>📘 Welcome — SaaS & Web Dev Portfolio</h2>
-          <p class="meta">A curated showcase of SaaS products, automation tools and AI integrations. Use the arrows or swipe to flip pages — enjoy the experience.</p>
-          <div style="display:flex;gap:18px;margin-top:20px;align-items:center">
-            <div style="flex:1">
-              <p><strong>Specialties:</strong></p>
-              <ul>
-                <li>⚙️ SaaS & Platform Development</li>
-                <li>🤖 Bot & AI Integrations</li>
-                <li>🌐 Web Apps, Dashboards & APIs</li>
-              </ul>
-              <p style="margin-top:12px">Live links: <a class="cta" href="https://mindameti.dad/" target="_blank">mindameti.dad</a> <a class="cta" href="https://a2zlead.com/" target="_blank">a2zlead</a></p>
-            </div>
-            <div style="width:320px;text-align:center">
-              <img src="https://ik.imagekit.io/euhds2mtf/ai%20composer%20.png" alt="visual" style="width:100%;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5)">
-            </div>
-          </div>
-        </div>
+  <div class="project">
+    <h3>🌍 AI Elementor Website Generator</h3>
+    <p>Generates complete WordPress Elementor websites from prompts, including content + images. Auto-installs plugins and delivers a live site instantly.</p>
+    <p><b>Tech:</b> OpenAI API, WordPress, Hostinger</p>
+    <img src="" alt="">
+    <section>
+  <embed src="aidevelop-by-us.pdf" type="application/pdf" width="100%" height="700px" />
 
-        <!-- ========== PAGE 2 (About) ========== -->
-        <div class="page">
-          <h2>👋 About Me</h2>
-          <p>I’m a passionate developer specialized in building <b>SaaS platforms</b>, <b>custom web apps</b>, and <b>automation tools</b>. From MVPs to production-ready solutions, I create scalable products with AI integrations, strong backend systems, and user-friendly designs.</p>
-          <p class="meta"><strong>Roles:</strong> Developer • Architect • Product-focused Engineer</p>
-          <p class="meta"><strong>Contact:</strong> <a class="cta" href="https://wa.link/rxtiua" target="_blank">WhatsApp</a></p>
-        </div>
+  <div style="text-align:center; margin-top:15px;">
+    <a href="aidevelop-by-us.pdf" target="_blank" 
+       style="display:inline-block; padding:10px 20px; background:linear-gradient(90deg,#6366f1,#0ea5e9); color:#fff; border-radius:8px; text-decoration:none; font-weight:bold;">
+       📥 Download PDF
+    </a>
+  </div>
+      
+</section>
+    
+  </div>
 
-        <!-- ========== PAGE 3 (Services) ========== -->
-        <div class="page">
-          <h2>💡 Services Offered</h2>
-          <ul>
-            <li>⚙️ SaaS Development (MVP → Full Scale)</li>
-            <li>🌐 Web Development (Dashboards, Custom Tools)</li>
-            <li>📱 App Development (Cross-platform & Automation)</li>
-            <li>🤖 AI Integrations (ChatGPT, APIs, Bots)</li>
-            <li>☁️ Cloud Deployment (VPS, Vercel, AWS)</li>
-          </ul>
-        </div>
+  <div class="project">
+    <h3>📌 Citation Builder Tool</h3>
+    <p>Automated local citation builder that creates and manages business listings across multiple directories for local SEO campaigns.</p>
+    <p><b>Tech:</b> Python, Selenium, APIs</p>
+    <!-- Add screenshots here -->
+  </div>
 
-        <!-- ========== PAGE 4 (Featured Projects — Telegram) ========== -->
-        <div class="page">
-          <h2>🤖 Telegram Bot Creator SaaS (2025)</h2>
-          <p>Allows users to create and clone custom Telegram bots with full category/city controls, separate databases, and mass messaging. Includes integrated payment system and unlimited cloning options.</p>
-          <p><b>Tech:</b> Node.js, Python, Telegram API</p>
-          <div class="orig-section">
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-home.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-bots.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-products.png" alt="">
-          </div>
-          <div class="orig-section">
-            <h4>🎥 Project Demo Video</h4>
-            <video controls playsinline style="width:100%;border-radius:12px;">
-              <source src="https://ik.imagekit.io/euhds2mtf/video_2025-10-08_17-56-55.mp4" type="video/mp4">
-            </video>
-            <video controls playsinline style="width:100%;border-radius:12px;margin-top:10px;">
-              <source src="https://ik.imagekit.io/euhds2mtf/telegram%20bot%20showcase.mp4" type="video/mp4">
-            </video>
-          </div>
-          <p class="meta" style="margin-top:8px"><strong>Stack:</strong> Node.js • Python • Postgres • Telegram API</p>
-        </div>
+  <div class="project">
+    <h3>🛒 Amazon Automation Tool</h3>
+    <p>Custom tool to handle product research, listing generation, and posting automation for Amazon sellers.</p>
+    <p><b>Tech:</b> Python, Amazon API</p>
+    <!-- Add screenshots here -->
+  </div>
 
-        <!-- ========== PAGE 5 (Featured Projects — PBN Poster) ========== -->
-        <div class="page">
-          <h2>📰 AI PBN Poster SaaS</h2>
-          <p>Automation platform for posting content across private blog networks (PBNs) with scheduling, account management, and smart AI-generated content options.</p>
-          <div class="orig-section">
-            <img src="https://ik.imagekit.io/euhds2mtf/PBN-Poster-Pro-Professional-PBN-Management-10-06-2025_03_24_PM.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/pbn%20poster%201.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/Admin-Dashboard-PBN-Poster-Pro.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/Pricing-Plans-PBN-Poster-Pro.png" alt="">
-          </div>
-          <p class="meta">Tech: Python, Puppeteer, APIs</p>
-        </div>
+  <div class="project">
+    <h3>📊 AI Lead Generation & Outreach Tool</h3>
+    <p>Automates business lead generation, personalized email outreach, and analytics. Complete SaaS solution with dashboard & CRM integrations.</p>
+    <p><b>Tech:</b> React, Node.js, Python, APIs</p>
+    <a href="https://a2zlead.com/" target="_blank">🔗 Live Demo</a>
+    <!-- Add screenshots here -->
+  </div>
 
-        <!-- ========== PAGE 6 (AI Elementor Generator) ========== -->
-        <div class="page">
-          <h2>🌍 AI Elementor Website Generator</h2>
-          <p>Generates complete WordPress Elementor websites from prompts, including content + images. Auto-installs plugins and delivers a live site instantly.</p>
-          <div class="orig-section">
-            <!-- original embedded pdf and download button (kept intact) -->
-            <embed class="orig-embed" src="aidevelop-by-us.pdf" type="application/pdf" width="100%" height="400px" />
-            <div style="text-align:center;margin-top:12px">
-              <a href="aidevelop-by-us.pdf" target="_blank" class="cta">📥 Download PDF</a>
-            </div>
-          </div>
-          <p class="meta">Tech: OpenAI API, WordPress, Hostinger</p>
-        </div>
+</section>
 
-        <!-- ========== PAGE 7 (Citation Builder & Amazon) ========== -->
-        <div class="page">
-          <h2>📌 Citation Builder Tool</h2>
-          <p>Automated local citation builder that creates and manages business listings across multiple directories for local SEO campaigns.</p>
-          <p><b>Tech:</b> Python, Selenium, APIs</p>
+<section>
+  <h2>📸 Reviews & Testimonials</h2>
+  <p>Here are real feedback and proof of work delivered to clients:</p>
+  <!-- Insert review images here -->
+  <img src="" alt="Review 1">
+  <img src="" alt="Review 2">
+</section>
 
-          <hr style="opacity:0.06;margin:18px 0">
+<section>
+  <h2>⚡ Tech Stack</h2>
+  <ul>
+    <li>🐍 Python, Node.js, JavaScript</li>
+    <li>⚛️ React, Next.js</li>
+    <li>☁️ Vercel, VPS, AWS</li>
+    <li>🔗 API Integrations (OpenAI, Shopify, Telegram, Amazon, WordPress)</li>
+  </ul>
+</section>
 
-          <h2>🛒 Amazon Automation Tool</h2>
-          <p>Custom tool to handle product research, listing generation, and posting automation for Amazon sellers.</p>
-          <p><b>Tech:</b> Python, Amazon API</p>
-        </div>
+<section>
+  <h2>🛠 How I Work</h2>
+  <p>My development process is simple and effective:</p>
+  <ul>
+    <li>🔍 Discovery & Planning</li>
+    <li>🖥 Development & Design</li>
+    <li>✅ Testing & QA</li>
+    <li>☁️ Deployment</li>
+    <li>🤝 Ongoing Support</li>
+  </ul>
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Lead Generation & Outreach Tool – Portfolio</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      color: white;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 8px 0;
+      padding: 10px;
+      background: #334155;
+      border-radius: 8px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #6366f1, #0ea5e9);
+      transition: transform 0.2s ease;
+    }
+    .links a:hover {
+      transform: scale(1.05);
+    }
+   section {
+  max-width: 1000px;
+  margin: 40px auto;   /* centers the whole block */
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
 
-        <!-- ========== PAGE 8 (AI Lead Generation & Outreach) ========== -->
-        <div class="page">
-          <h2>📊 AI Lead Generation & Outreach Tool</h2>
-          <p>Automates business lead generation, personalized email outreach, and analytics. Complete SaaS solution with dashboard & CRM integrations.</p>
-          <p class="meta"><strong>Tech:</strong> React, Node.js, Python, APIs</p>
-          <div class="orig-section">
-            <img src="https://ik.imagekit.io/euhds2mtf/fetching%20dashboard.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/ai%20composer%20.png" alt="">
-            <img src="https://ik.imagekit.io/euhds2mtf/bulk%20email%20sender.png" alt="">
-          </div>
-          <p style="margin-top:12px">🔗 Live Demo: <a class="cta" href="https://a2zlead.com/" target="_blank">a2zlead.com</a></p>
-        </div>
+.media {
+  text-align: center;
+  margin: 20px auto;   /* centers the media container */
+}
 
-        <!-- ========== PAGE 9 (Original Project Overview Content kept intact) ========== -->
-        <div class="page">
-          <h2>📌 Project Overview (Original Content)</h2>
-          <p>Built a complete AI-powered SaaS tool that automates lead generation, personalized email outreach, bulk sending, and real-time analytics tracking. Delivered as a multi-milestone project for a client’s business domain.</p>
+.media iframe, 
+.media img, 
+.media div {
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+}
 
-          <h3>✅ Key Features (Original)</h3>
-          <ul>
-            <li>AI Lead Generation (zip-code / business search)</li>
-            <li>AI Email Composer (personalized & bulk)</li>
-            <li>Bulk Email Sender + Follow-ups</li>
-            <li>Analytics Dashboard (open/click tracking, CRM integration)</li>
-            <li>Export & CSV support</li>
-          </ul>
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
 
-          <h3>🗂 Milestones</h3>
-          <ul>
-            <li>Milestone 1: UI + System Setup – Completed</li>
-            <li>Milestone 2: Lead Generation System – Completed</li>
-            <li>Milestone 3: AI Email Writer + Outreach – Completed</li>
-            <li>Milestone 4: Email Sending + Follow-ups – Completed</li>
-            <li>Milestone 5: Analytics + CRM Integration – Completed</li>
-          </ul>
+<header>
+  <img src="https://cdn.kwork.com/files/avatar/large_r/49/13682589-8.jpg" 
+       alt="Trusted Ranking Spot Logo" 
+       style="width:100px; border-radius:12px; margin-bottom:15px;">
+  <h1>AI Lead Generation & Outreach Tool</h1>
+  <p>Smart automation for leads, outreach, and analytics 🚀</p>
+  <p><strong>🚀 Developed with pride by Trusted Ranking Spot Agency Team</strong></p>
+</header>
 
-          <p style="margin-top:10px">Project files: <a class="cta" href="https://tinyurl.com/5a5ht47u" target="_blank">Project Files</a></p>
-        </div>
 
-        <!-- ========== PAGE 10 (Screenshots & Notion) ========== -->
-        <div class="page">
-          <h2>🖼 Screenshots & Proof</h2>
-          <p>Visual proof and screenshots from projects.</p>
-          <div class="orig-section">
-            <img src="https://ik.imagekit.io/euhds2mtf/analytics.png" alt="analytics">
-            <img src="https://ik.imagekit.io/euhds2mtf/setting.png" alt="setting">
-            <img src="https://ik.imagekit.io/euhds2mtf/planm%20selection.png" alt="pricing">
-            <img src="https://ik.imagekit.io/euhds2mtf/notion.png" alt="notion-check">
-          </div>
-        </div>
+  <section>
+    <h2>📌 Project Overview</h2>
+    <p>
+      Built a complete AI-powered SaaS tool that automates lead generation, 
+      personalized email outreach, bulk sending, and real-time analytics tracking. 
+      Delivered as a multi-milestone project for a client’s business domain.
+    </p>
+  </section>
 
-        <!-- ========== PAGE 11 (Other Development & PDF kept) ========== -->
-        <div class="page">
-          <h2>📂 Other Development</h2>
-          <p>Here you can view another project we developed (original embed preserved):</p>
-          <div class="orig-section">
-            <embed class="orig-embed" src="aidevelop-by-us.pdf" type="application/pdf" width="100%" height="320px" />
-            <div style="text-align:center;margin-top:12px">
-              <a class="cta" href="aidevelop-by-us.pdf" target="_blank">📥 Download PDF</a>
-            </div>
-            <p style="margin-top:8px">Explore more: <a href="https://tinyurl.com/m5xm6wvr" target="_blank" class="cta">Full SEO-AI Strategies</a></p>
-          </div>
-        </div>
+  <section>
+    <h2>✅ Key Features</h2>
+    <ul>
+      <li>AI Lead Generation (zip-code / business search)</li>
+      <li>AI Email Composer (personalized & bulk)</li>
+      <li>Bulk Email Sender + Follow-ups</li>
+      <li>Analytics Dashboard (open/click tracking, CRM integration)</li>
+      <li>Export & CSV support</li>
+    </ul>
+  </section>
 
-        <!-- ========== PAGE 12 (Reviews & Testimonials - placeholders included) ========== -->
-        <div class="page">
-          <h2>📸 Reviews & Testimonials</h2>
-          <p>Here are real feedback and proof of work delivered to clients. Add your review images in the placeholders below.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-            <img src="" alt="Review 1" style="width:48%;min-width:200px">
-            <img src="" alt="Review 2" style="width:48%;min-width:200px">
-          </div>
-          <p style="margin-top:10px">Tip: Add short quote lines here to increase trust — replace <code>src=""</code> with your review image URL.</p>
-        </div>
+  <section>
+    <h2>🗂 Milestones</h2>
+    <ul>
+      <li><b>Milestone 1:</b> UI + System Setup – <i>Completed</i></li>
+      <li><b>Milestone 2:</b> Lead Generation System – <i>Completed</i></li>
+      <li><b>Milestone 3:</b> AI Email Writer + Outreach – <i>Completed</i></li>
+      <li><b>Milestone 4:</b> Email Sending + Follow-ups – <i>Completed</i></li>
+      <li><b>Milestone 5:</b> Analytics + CRM Integration – <i>Completed</i></li>
+    </ul>
+  </section>
 
-        <!-- ========== PAGE 13 (Tech Stack & Process) ========== -->
-        <div class="page">
-          <h2>⚡ Tech Stack & Process</h2>
-          <p><strong>Tech:</strong> Python, Node.js, React, Next.js, PostgreSQL, Redis, Vercel, AWS, OpenAI, Telegram API, Shopify, Amazon</p>
-          <p style="margin-top:8px"><strong>Process:</strong> Discovery → Prototype → Build → QA → Deploy → Support</p>
-        </div>
+  <section class="links">
+    <h2>🔗 Project Links</h2>
+    <a href="https://a2zlead.com/" target="_blank">Live Tool</a>
+    <a href="https://tinyurl.com/5a5ht47u" target="_blank">Project Files</a>
+  </section>
 
-        <!-- ========== PAGE 14 (Contact & Footer) ========== -->
-        <div class="page">
-          <h2>📞 Contact</h2>
-          <p>Let’s build something amazing. I’m available for SaaS, automation, and AI projects.</p>
-          <p class="meta">WhatsApp: <a class="cta" href="https://wa.link/rxtiua" target="_blank">Message me</a></p>
-          <p class="meta" style="margin-top:6px">GitHub: <span class="badge">add-your-github</span> • Live: <a class="cta" href="https://mindameti.dad/" target="_blank">mindameti.dad</a></p>
-          <footer style="margin-top:18px;opacity:0.7">© 2025 Developer Portfolio – All Rights Reserved</footer>
-        </div>
+  <section class="media">
+        <h2>🎥 Demo Video</h2>
+    <!-- Replace with your Loom/YouTube embed link -->
+    <iframe src="" allowfullscreen></iframe>
+    <div style="position: relative; padding-bottom: 58.91980360065466%; height: 0;"><iframe src="https://www.loom.com/embed/db2a94a1413c43bcbfb498d0bec26382?sid=85505ce1-7ffe-49a7-a876-a94f8fdeb480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-        <!-- ========== APPEND ORIGINAL FULL HTML BLOCK (kept intact as pages) ========== -->
-        <!-- The user's original large HTML content (kept intact) is inserted as additional pages to ensure NOTHING is removed.
-             I wrap groups of the original content into pages so every line remains available and visible. -->
+    <h2>🖼 Screenshots</h2>
+    <!-- Replace with your screenshots -->
+    <img src="https://ik.imagekit.io/euhds2mtf/fetching%20dashboard.png" alt="Dashboard Screenshot">
+    <img src="https://ik.imagekit.io/euhds2mtf/ai%20composer%20.png" alt="AI Email Composer Screenshot">
+    <img src="https://ik.imagekit.io/euhds2mtf/bulk%20email%20sender.png" alt="bulk email sender">
+    <img src="https://ik.imagekit.io/euhds2mtf/analytics.png" alt="analytics">
+    <img src="https://ik.imagekit.io/euhds2mtf/setting.png" alt="setting">
+    <img src="https://ik.imagekit.io/euhds2mtf/planm%20selection.png" alt="pricing">
 
-        <!-- Original block page A -->
-        <div class="page">
-          <h2>Original — Section A (kept)</h2>
-          <div class="orig-section">
-            <!-- This includes the original long content that was inside your uploaded file (first half).
-                 All images, text and embedded elements are preserved here. -->
-            <h3>🚀 SaaS & Web Development Portfolio (Original Content)</h3>
-            <p>This page preserves the original content block — header, about, services and first featured projects exactly as they were in your file.</p>
+    <h2>📋 Notion Checklist Proof</h2>
+    <img src="https://ik.imagekit.io/euhds2mtf/notion.png" alt="Project Checklist Proof">
+  </section>
+<section>
+<section>
+  <h2>📂 Other Development</h2>
+  <p>Here you can view another project we developed:</p>
 
-            <!-- replicate original header content -->
-            <img src="https://cdn.kwork.com/files/avatar/large_r/49/13682589-8.jpg" alt="original-logo" style="width:100px;border-radius:12px;">
-            <p>Custom SaaS, Apps & Automation Solutions with Modern Tech ⚡</p>
+  <embed src="aidevelop-by-us.pdf" type="application/pdf" width="100%" height="700px" />
 
-            <!-- keep original sections - about/services -->
-            <h4>About (original)</h4>
-            <p>I’m a passionate developer specialized in building SaaS platforms, custom web apps, and automation tools. From MVPs to production-ready solutions...</p>
+  <div style="text-align:center; margin-top:15px;">
+    <a href="aidevelop-by-us.pdf" target="_blank" 
+       style="display:inline-block; padding:10px 20px; background:linear-gradient(90deg,#6366f1,#0ea5e9); color:#fff; border-radius:8px; text-decoration:none; font-weight:bold;">
+       📥 Download PDF
+    </a>
+  </div>
+  <p>👇 Explore our full SEO-AI-Strategies  
+   <a href="https://tinyurl.com/m5xm6wvr" target="_blank">🔗 https://tinyurl.com/m5xm6wvr</a>
+</p>
 
-            <h4>Services (original)</h4>
-            <ul>
-              <li>⚙️ SaaS Development (MVP → Full Scale)</li>
-              <li>🌐 Web Development (Dashboards, Custom Tools)</li>
-              <li>📱 App Development (Cross-platform & Automation)</li>
-              <li>🤖 AI Integrations (ChatGPT, APIs, Bots)</li>
-            </ul>
+</section>
 
-            <!-- show images that were included in original file -->
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-home.png" alt="orig-1">
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-bots.png" alt="orig-2">
-            <img src="https://ik.imagekit.io/euhds2mtf/mindameti-dad-products.png" alt="orig-3">
-          </div>
-        </div>
-
-        <!-- Original block page B -->
-        <div class="page">
-          <h2>Original — Section B (kept)</h2>
-          <div class="orig-section">
-            <!-- second half of original content preserved -->
-            <h3>AI Lead Generation & Outreach Tool — Original Details</h3>
-            <p>Built a complete AI-powered SaaS tool that automates lead generation, personalized email outreach, bulk sending, and real-time analytics tracking.</p>
-
-            <h4>Key features (original)</h4>
-            <ul>
-              <li>AI Lead Generation (zip-code / business search)</li>
-              <li>AI Email Composer (personalized & bulk)</li>
-              <li>Analytics Dashboard</li>
-            </ul>
-
-            <h4>Screenshots (original)</h4>
-            <img src="https://ik.imagekit.io/euhds2mtf/fetching%20dashboard.png" alt="orig-s1">
-            <img src="https://ik.imagekit.io/euhds2mtf/ai%20composer%20.png" alt="orig-s2">
-            <img src="https://ik.imagekit.io/euhds2mtf/bulk%20email%20sender.png" alt="orig-s3">
-          </div>
-        </div>
-
-        <!-- You can add more pages if you have more original blocks — currently all original content has been preserved above inside these pages. -->
-
-      </div> <!-- end flipbook -->
-
-      <div class="nav">
-        <div class="arrow left" id="prevBtn" title="Previous">◀</div>
-        <div class="arrow right" id="nextBtn" title="Next">▶</div>
-        <div class="page-indicator" id="pageIndicator">Page 1 / 17</div>
-      </div>
-
-    </div> <!-- end book -->
-  </div> <!-- end wrap -->
-
-  <!-- audio & sounds -->
-  <audio id="bgMusic" loop preload="auto">
-    <!-- demo ambient music from pixabay (replace if you have own) -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f47a55c9a2.mp3?filename=futuristic-ambient-110874.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="flipSound">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_47a55c9a2.mp3?filename=page-flip-14691.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- jQuery (required by Turn.js) -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Turn.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-
-  <script>
-    (function(){
-      // build pages into a turn.js compatible structure
-      const flip = document.getElementById('flipbook');
-      // collect direct .page children
-      const pages = Array.from(flip.querySelectorAll('.page'));
-
-      // Create bookWrap and move pages into it (each wrapped in a sheet div)
-      const bookWrap = document.createElement('div');
-      bookWrap.id = 'bookWrap';
-      bookWrap.style.width = '100%';
-      bookWrap.style.height = '100%';
-      bookWrap.style.position = 'relative';
-
-      pages.forEach((p, idx) => {
-        const sheet = document.createElement('div');
-        sheet.className = 'sheet';
-        sheet.style.width = '100%';
-        sheet.style.height = '100%';
-        // keep the page element inside sheet
-        sheet.appendChild(p);
-        bookWrap.appendChild(sheet);
-      });
-
-      // replace flip content with bookWrap
-      flip.innerHTML = '';
-      flip.appendChild(bookWrap);
-
-      // initialize turn.js
-      $('#bookWrap').turn({
-        width: '100%',
-        height: '100%',
-        autoCenter: true,
-        gradients: true,
-        elevation: 50
-      });
-
-      // controls
-      const prev = document.getElementById('prevBtn');
-      const next = document.getElementById('nextBtn');
-      const pageIndicator = document.getElementById('pageIndicator');
-      const bgMusic = document.getElementById('bgMusic');
-      const flipSound = document.getElementById('flipSound');
-      const audioToggle = document.getElementById('audioToggle');
-
-      function updateIndicator(){
-        const p = $('#bookWrap').turn('page');
-        const total = $('#bookWrap').turn('pages');
-        pageIndicator.textContent = `Page ${p} / ${total}`;
-      }
-
-      prev.addEventListener('click', ()=>{ $('#bookWrap').turn('previous'); playFlip(); setTimeout(updateIndicator,300); });
-      next.addEventListener('click', ()=>{ $('#bookWrap').turn('next'); playFlip(); setTimeout(updateIndicator,300); });
-
-      // keyboard nav
-      document.addEventListener('keydown', (e) => { if(e.key === 'ArrowLeft') prev.click(); if(e.key === 'ArrowRight') next.click(); });
-
-      // touch swipe for mobile
-      let startX = 0;
-      flip.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-      flip.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - startX; if(dx > 40) prev.click(); if(dx < -40) next.click(); });
-
-      function playFlip(){ try{ flipSound.currentTime = 0; flipSound.play(); } catch(e){} }
-
-      // audio toggle (music off by default)
-      let musicOn = false;
-      audioToggle.addEventListener('click', () => {
-        musicOn = !musicOn;
-        if(musicOn){ bgMusic.volume = 0.24; bgMusic.play(); audioToggle.textContent = '🔈 Music ON'; }
-        else { bgMusic.pause(); audioToggle.textContent = '🔊 Music'; }
-      });
-
-      // update indicator on turned
-      $('#bookWrap').bind('turned', function(e, page, view) { updateIndicator(); });
-
-      // initial indicator
-      updateIndicator();
-
-      // Prevent autoplay blocking UX issues: music only starts after user toggles (per modern browsers)
-    })();
-  </script>
+  <footer>
+    © 2025 Trusted Ranking Spot – Portfolio Case Study
+  </footer>
 
 </body>
 </html>
+  
+<section>
+  <h2>📞 Contact</h2>
+  <p>Let’s build something amazing together 🚀</p>
+  <div class="links">
+    <a href="https://wa.link/rxtiua" target="_blank">💬 WhatsApp Me</a>
+    <!-- Add email / LinkedIn if you want -->
+  </div>
+</section>
+
+<footer>
+  © 2025 Developer Portfolio – All Rights Reserved
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
