@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- VIEW COUNTER CSS (paste in <head>) -->
+<style>
+/* small view counter box (bottom-right) */
+.view-counter {
+  position: fixed;
+  right: 18px; /* change to left:18px; if you want on left side */
+  bottom: 18px;
+  z-index: 99999;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 8px 12px;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  font-size: 13px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.view-counter .eye {
+  width:18px;height:18px;display:inline-block;background:transparent;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+.view-counter .count {
+  font-weight:700;
+  letter-spacing:0.3px;
+}
+.view-counter small {
+  display:block;color:rgba(255,255,255,0.75);font-weight:500;font-size:11px;opacity:0.9;
+}
+.view-counter .dot {
+  width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,#7c3aed,#06b6d4);box-shadow:0 6px 18px rgba(6,182,212,0.12);
+}
+</style>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🚀 SaaS & Web Development Portfolio</title>
@@ -82,6 +119,92 @@
   </style>
 </head>
 <body>
+<!-- VIEW COUNTER HTML (place inside <body>) -->
+<div id="viewCounter" class="view-counter" title="Page views">
+  <div class="eye">👁️</div>
+  <div>
+    <div class="count" id="vc-count">--</div>
+    <small id="vc-label">Visitors</small>
+  </div>
+  <div class="dot" id="vc-dot" style="margin-left:8px;"></div>
+</div>
+<!-- VIEW COUNTER SCRIPT (place before </body>) -->
+<script>
+(function(){
+  // CONFIG: change these if you want a custom namespace/key
+  const namespace = 'tanveer-portfolio'; // make unique like yourname-portfolio
+  const key = 'pageviews';              // page identifier (can be multiple keys for multiple pages)
+
+  const apiHitUrl = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
+  const apiGetUrl = `https://api.countapi.xyz/get/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
+
+  const countEl = document.getElementById('vc-count');
+  const labelEl = document.getElementById('vc-label');
+  const dotEl = document.getElementById('vc-dot');
+
+  // Utility: nice formatting
+  function fmt(n){
+    if(n>=1000000) return (n/1000000).toFixed(1)+'M';
+    if(n>=1000) return (n/1000).toFixed(1)+'k';
+    return String(n);
+  }
+
+  // First try to increment counter (server-side)
+  fetch(apiHitUrl, { method: 'GET' })
+    .then(resp => resp.json())
+    .then(data => {
+      if(data && typeof data.value !== 'undefined'){
+        countEl.textContent = fmt(data.value);
+        labelEl.textContent = 'Visitors';
+        dotEl.style.opacity = '1';
+        // store last value locally so we may show if API fails later
+        try{ localStorage.setItem('vc-last', data.value); }catch(e){}
+      } else {
+        throw new Error('Unexpected response');
+      }
+    })
+    .catch(_err => {
+      // If hit failed, try to GET existing count
+      fetch(apiGetUrl, { method: 'GET' })
+        .then(r => r.json())
+        .then(d => {
+          if(d && typeof d.value !== 'undefined'){
+            countEl.textContent = fmt(d.value);
+            labelEl.textContent = 'Visitors';
+            dotEl.style.opacity = '0.9';
+          } else {
+            throw new Error('No value');
+          }
+        })
+        .catch(__err => {
+          // Final fallback: show a local count from localStorage (client-only)
+          try{
+            const last = parseInt(localStorage.getItem('vc-last') || '0', 10) || 0;
+            const local = last + 1; // optimistic increment
+            countEl.textContent = fmt(local);
+            labelEl.textContent = 'Local visits';
+            dotEl.style.opacity = '0.5';
+          }catch(e){
+            countEl.textContent = '--';
+            labelEl.textContent = 'Visitors';
+            dotEl.style.opacity = '0.3';
+          }
+        });
+    });
+
+  // Optional: when user clicks the counter, show more info (current raw value from API)
+  document.getElementById('viewCounter').addEventListener('click', function(){
+    // open a small prompt with the raw count (non-blocking)
+    fetch(apiGetUrl).then(r=>r.json()).then(d=>{
+      if(d && typeof d.value !== 'undefined'){
+        alert('Total page views: ' + d.value + '\\n(This value is stored at CountAPI for namespace:key ' + namespace + ':' + key + ')');
+      } else {
+        alert('Unable to fetch count details.');
+      }
+    }).catch(()=>{ alert('Unable to fetch count details.'); });
+  });
+})();
+</script>
 
 <header>
   <!-- 🔗 Add your profile/logo image here -->
@@ -438,6 +561,7 @@
 
 </body>
 </html>
+
 
 
 
